@@ -8,7 +8,7 @@ describe ApiConstraints do
 
     it "returns true when the version matches the 'Accept' header" do
       request = double(host: 'api.simple_erp_api.dev',
-                       headers: {"Accept" => "application/vnd.simple_erp_api.v1"})
+                       headers: {"Accept" => "application/vnd.simpleerp.v1"})
       api_constraints_v1.matches?(request).should be_true
     end
 
