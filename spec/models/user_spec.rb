@@ -12,12 +12,14 @@ RSpec.describe User, :type => :model do
   it { should respond_to(:phone) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
+  it { should respond_to(:auth_token) }
 
   it { should validate_presence_of(:email) }
   it { should validate_uniqueness_of(:email) }
   it { should validate_uniqueness_of(:afm) }
-  it { should validate_confirmation_of(:password) }
   it { should allow_value('example@domain.com').for(:email) }
-
+  it { should ensure_length_of(:afm).is_at_least(9) }
+  it { should ensure_length_of(:afm).is_at_most(9) }
   it { should be_valid }
+  it { should validate_uniqueness_of(:auth_token)}
 end
