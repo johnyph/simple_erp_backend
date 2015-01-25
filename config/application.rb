@@ -40,7 +40,7 @@ module SimpleErpApi
       g.stylesheets = false
       g.javascripts = false
       g.helper = false
-      g.view = false
+      g.template_engine false
     end
     config.autoload_paths += %W(\#{config.root}/lib)
   end
