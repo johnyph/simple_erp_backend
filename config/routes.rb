@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :organizations, except: [:index]
       resources :customers
       resources :suppliers
+      resources :product_categories
     end
   end
 end

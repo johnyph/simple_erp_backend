@@ -20,6 +20,11 @@ class Ability
       can :index, Supplier
       can :create, Supplier
       can :sud, Supplier.by_organization(user)
+
+      #ProductCategory
+      can :index, ProductCategory
+      can :create, ProductCategory
+      can :sud, ProductCategory
     end
   end
 end
