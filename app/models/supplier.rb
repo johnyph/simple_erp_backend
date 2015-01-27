@@ -1,12 +1,12 @@
-class Customer < ActiveRecord::Base
-	validates :name, :in_charge, :email, :phone1, :organization_id, :afm, presence: true
+class Supplier < ActiveRecord::Base
+  validates :name, :in_charge, :sales_email, :organization_id, :afm, presence: true
   validates :afm, uniqueness: true
   validates :afm, length: {minimum: 9, maximum: 9}
 
   belongs_to :user
   belongs_to :organization
 
-	scope :by_organization, lambda { |user|
+  scope :by_organization, lambda { |user|
     where(:organization_id => user.organization_id) unless user.is_admin?
   }
 
@@ -19,14 +19,15 @@ class Customer < ActiveRecord::Base
   }
 
   def self.search(params = {}, existing=nil)
-  	if (existing != nil) 
-  		customers = existing
-  	else
-  		customers = Customer.all
-  	end
-  	
-  	customers = customers.filter_by_name(params[:name]) if params[:name]
-  	customers = customers.filter_by_afm(params[:afm]) if params[:afm]
-  	customers
+    if (existing != nil) 
+      suppliers = existing
+    else
+      suppliers = Supplier.all
+    end
+    
+    suppliers = suppliers.filter_by_name(params[:name]) if params[:name]
+    suppliers = suppliers.filter_by_afm(params[:afm]) if params[:afm]
+    
+    suppliers
   end
 end

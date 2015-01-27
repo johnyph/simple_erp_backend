@@ -5,8 +5,6 @@ class Api::V1::CustomersController < ApplicationController
 	respond_to :json
 
 	def index
-		params[:organization_id] = current_user.organization_id
-
 		respond_with Customer.search(params, Customer.by_organization(current_user))
 	end
 
@@ -41,7 +39,7 @@ class Api::V1::CustomersController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     customer = Customer.find(params[:id])
     customer.destroy
     head 204
@@ -50,6 +48,6 @@ class Api::V1::CustomersController < ApplicationController
   private
 
   def customer_params
-    params.require(:customer).permit(:email, :name, :address, :afm, :phone1, :phone2, :city, :description, :country, :zipcode)
+    params.require(:customer).permit(:email, :name, :address, :afm, :phone1, :phone2, :city, :description, :country, :zipcode, :in_charge)
   end
 end

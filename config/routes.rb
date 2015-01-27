@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create, :destroy]
       resources :organizations, except: [:index]
       resources :customers
+      resources :suppliers
     end
   end
 end
