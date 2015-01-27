@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   validates :auth_token, uniqueness: true
   
   belongs_to :organization
+  has_many :customers
 
   before_save :ensure_authentication_token
  

@@ -4,4 +4,5 @@ class Organization < ActiveRecord::Base
   validates :afm, length: {minimum: 9, maximum: 9}
 
   has_many :users
+  has_many :organizations
 end

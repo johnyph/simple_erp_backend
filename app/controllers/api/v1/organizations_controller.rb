@@ -1,5 +1,7 @@
 class Api::V1::OrganizationsController < ApplicationController
 	before_action :authenticate_with_token!
+	load_and_authorize_resource
+	
 	respond_to :json
 
 	def show
@@ -10,7 +12,7 @@ class Api::V1::OrganizationsController < ApplicationController
 		organization = Organization.new(organization_params)
 
 		if organization.save
-			render json: organization, status: 200, location: [:api, organization]
+			render json: organization, status: 201, location: [:api, organization]
 		else
 			render json: { errors: organization.errors }, status: 422
 		end
@@ -19,7 +21,7 @@ class Api::V1::OrganizationsController < ApplicationController
 	def update
 		organization = Organization.find(params[:id])
 
-		if organization.update(params[:organization])
+		if organization.update(organization_params)
 			render json: organization, status: 200, location: [:api, organization]
 		else
 			render json: { errors: organization.errors }, status: 422

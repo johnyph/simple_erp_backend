@@ -1,5 +1,10 @@
 class Customer < ActiveRecord::Base
-	validates :id, :name, :description, :in_charge, :email, :phone1, presence: true
+	validates :id, :name, :in_charge, :email, :phone1, :organization_id, :afm, presence: true
+  validates :afm, uniqueness: true
+  validates :afm, length: {minimum: 9, maximum: 9}
+
+  belongs_to :user
+  belongs_to :organization
 
 	scope :by_organization, lambda { |user|
     where(:organization_id => user.organization_id) unless user.is_admin?
