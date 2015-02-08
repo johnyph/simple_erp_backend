@@ -1,14 +1,15 @@
 class Product < ActiveRecord::Base
   validates :name, :code,ß presence: true
   validate :minimum_one_category
-  #validates_numericality_of :price
-  #validates_numericality_of :discount, allow_nil: true
-
+  
   belongs_to :organization
   belongs_to :user
+  has_many :product_suppliers
+  has_many :suppliers, through: :product_suppliers
   has_and_belongs_to_many :product_categories
 
   before_destroy {|product| product.product_categories.clear}
+  before_destroy {|product| product.product_suppliers.clear}
 
   #has_many products destroy does not delete products
 
