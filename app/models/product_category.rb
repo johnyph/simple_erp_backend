@@ -4,6 +4,10 @@ class ProductCategory < ActiveRecord::Base
   belongs_to :organization
   belongs_to :user
 
+  has_and_belongs_to_many :products
+
+  before_destroy {|product_category| product_category.products.clear}
+
   #has_many products destroy does not delete products
 
   scope :by_organization, lambda { |user|

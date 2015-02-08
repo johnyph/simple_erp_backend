@@ -25,6 +25,11 @@ class Ability
       can :index, ProductCategory
       can :create, ProductCategory
       can :sud, ProductCategory
+
+      #Product
+      can :index, Product
+      can :create, Product
+      can :sud, Product
     end
   end
 end

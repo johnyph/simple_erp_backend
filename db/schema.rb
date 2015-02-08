@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127151540) do
+ActiveRecord::Schema.define(version: 20150208103006) do
 
   create_table "customers", force: :cascade do |t|
     t.string   "name"
@@ -59,6 +59,24 @@ ActiveRecord::Schema.define(version: 20150127151540) do
 
   add_index "product_categories", ["organization_id"], name: "index_product_categories_on_organization_id"
   add_index "product_categories", ["user_id"], name: "index_product_categories_on_user_id"
+
+  create_table "product_categories_products", id: false, force: :cascade do |t|
+    t.integer "product_category_id"
+    t.integer "product_id"
+  end
+
+  add_index "product_categories_products", ["product_category_id"], name: "index_product_categories_products_on_product_category_id"
+  add_index "product_categories_products", ["product_id"], name: "index_product_categories_products_on_product_id"
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.text     "code"
+    t.decimal  "organization_id"
+    t.decimal  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "suppliers", force: :cascade do |t|
     t.string   "name"

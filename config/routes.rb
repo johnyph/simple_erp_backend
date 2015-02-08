@@ -1,6 +1,7 @@
 require 'api_constraints'
 
 Rails.application.routes.draw do
+
   devise_for :users
  
   # Api
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
       resources :customers
       resources :suppliers
       resources :product_categories
+      resources :products
     end
   end
 end
