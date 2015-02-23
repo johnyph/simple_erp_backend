@@ -9,7 +9,7 @@ class Api::V1::ProductsController < ApplicationController
   end
 
   def show
-    respond_with Product.by_organization(current_user).find(params[:id])
+    respond_with Product.by_organization(current_user).includes(:product_categories, :product_suppliers).find(params[:id])
   end
 
   def create

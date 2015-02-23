@@ -6,6 +6,8 @@ class Supplier < ActiveRecord::Base
   belongs_to :user
   belongs_to :organization
 
+  has_many :products, through: :product_suppliers
+
   scope :by_organization, lambda { |user|
     where(:organization_id => user.organization_id) unless user.is_admin?
   }

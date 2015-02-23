@@ -40,3 +40,4 @@ end
 gem 'active_model_serializers', '0.8.3'
 gem 'devise'
 gem 'cancancan', '~> 1.10'
+gem 'rack-cors', :require => 'rack/cors'

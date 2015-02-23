@@ -4,4 +4,6 @@ class ProductSerializer < ActiveModel::Serializer
   attributes :id, :name, :code, :description
 
   has_many :product_categories
+  has_many :product_suppliers
+  
 end

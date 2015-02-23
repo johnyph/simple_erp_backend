@@ -1,11 +1,11 @@
 class Product < ActiveRecord::Base
-  validates :name, :code,ß presence: true
+  validates :name, :code, presence: true
   validate :minimum_one_category
   
   belongs_to :organization
   belongs_to :user
   has_many :product_suppliers
-  has_many :suppliers, through: :product_suppliers
+  #has_many :suppliers, through: :product_suppliers
   has_and_belongs_to_many :product_categories
 
   before_destroy {|product| product.product_categories.clear}
@@ -25,6 +25,11 @@ class Product < ActiveRecord::Base
     where("lower(code) LIKE ?", "%#{keyword.downcase}%" ) 
   }
 
+  scope :find_by_supplier, lambda { |keyword|
+    joins(:product_suppliers).
+    where("lower(product_suppliers.supplier_id) = ?", "%#{keyword.downcase}%" ) 
+  }
+
   def self.search(params = {}, existing=nil)
     if (existing != nil) 
       products = existing
@@ -34,7 +39,7 @@ class Product < ActiveRecord::Base
     
     products = product_categories.filter_by_name(params[:name]) if params[:name]
     products = product_categories.filter_by_afm(params[:afm]) if params[:afm]
-    
+    products = product_categories.filter_by_supplier(params[:supplier]) if params[:supplier]
     products
   end
 
