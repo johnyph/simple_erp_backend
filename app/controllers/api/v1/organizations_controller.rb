@@ -4,6 +4,12 @@ class Api::V1::OrganizationsController < ApplicationController
 	
 	respond_to :json
 
+	def index
+		organizations = Organization.search(params).order("#{params['sort']} #{params['direction'].upcase}").paginate(page: params[:page])
+		render json: organizations,
+		 meta: {total_pages: organizations.total_pages}, status: 200
+	end
+
 	def show
 		respond_with Organization.find(params[:id])
 	end
