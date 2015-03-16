@@ -43,6 +43,6 @@ class Api::V1::OrganizationsController < ApplicationController
 	private
 
 	def organization_params
-    params.require(:organization).permit(:email, :name, :address, :afm, :phone, :city, :description)
+    params.require(:organization).permit(:email, :name, :address, :afm, :phone, :city, :description, :zipcode)
   end
 end
